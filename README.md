@@ -75,6 +75,7 @@ Mouse Action
 | Index Finger Up                      | Move Cursor   |
 | Index + Middle Finger Close Together | Left Click    |
 | Thumb + Index Finger Pinch           | Drag and Drop |
+| Index + Middle + Ring                | Right Click   |
 
 ---
 
