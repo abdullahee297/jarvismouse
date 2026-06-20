@@ -46,9 +46,9 @@ clicked = False
 
 
 while True:
-    success, imgx = cap.read()
+    success, img = cap.read()
 
-    img = cv2.flip(imgx, 1)
+    # img = cv2.flip(imgx, 1)
 
     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     mp_image = mp.Image(mp.ImageFormat.SRGB, rgb)
@@ -154,18 +154,19 @@ while True:
                 else:
                     finger.append(0)
 
-            if finger[1] and finger[2]:
+
+            if finger[1] and finger[2] and finger[3]:
+                autopy.mouse.click(autopy.mouse.Button.RIGHT)
+
+
+            if finger[1] and finger[2] and not finger[3]:
                 print("Left Click")
                 cv2.circle(img, (x4, y4), 15, (0, 0, 255), cv2.FILLED)
                 cv2.putText(img, "Left Click", (20, 80), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
                 length = math.hypot(x3 - x2, y3 - y2)
-                # print(length)
-                if length < 60 and not clicked:
+                print(length)
+                if length < 20:
                     autopy.mouse.click()
-                    clicked = True
-
-                elif length > 60:
-                    clicked = False
 
             if finger[1] and not finger[2]:
                 print("Move")
@@ -183,8 +184,9 @@ while True:
 
 
             draglength = math.hypot(x2 - x1, y2 - y1)
+            print(draglength)
 
-            if draglength < 40:
+            if draglength < 15:
                 cv2.circle(img, (cx, cy), 10, (0, 0, 255), cv2.FILLED)
 
                 if not dragging:
